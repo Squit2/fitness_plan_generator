@@ -1,0 +1,7 @@
+streamlit
+faiss-cpu
+sentence-transformers
+google-generativeai
+pandas
+numpy
+python-dotenv
