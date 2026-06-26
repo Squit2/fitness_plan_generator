@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 
 
@@ -24,7 +24,7 @@ DENSE_MODEL_PATH = OUT_PATH / "dense"
 
 # FAISS / embedding params
 TOP_K = 5
-GOOGLE_API_KEY = st.secrets("GEMINI_API_KEY")
+GOOGLE_API_KEY = st.secrets["GEMINI_API_KEY"] 
 GEMINI_MODEL_NAME = "gemini-2.5-flash" 
 
 # Streamlit page setup
