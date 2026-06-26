@@ -135,12 +135,11 @@ def get_gemini_model():
     if not GOOGLE_API_KEY:
         return None
     try:
-        genai.configure(api_key=GOOGLE_API_KEY)
-        return genai.GenerativeModel(GEMINI_MODEL_NAME)
+        client = genai.Client(api_key=GOOGLE_API_KEY)
+        return client
     except Exception as e:
         st.warning(f"⚠️ Gemini API Error: {e}")
         return None
-
 # Data Loading
 @st.cache_data
 def load_csv(path):
