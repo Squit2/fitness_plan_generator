@@ -362,20 +362,22 @@ def chat_with_bmi(question, weight, height, gender, age, chat_history, return_re
     )
 
     if gemini_model:
-        try:
-            response = gemini_model.generate_content(full_prompt)
-            response_text = response.text.strip()
-            if return_retrieval_info:
-                return response_text, ex_titles, ex_distances
-            return response_text
-        except Exception as e:
-            st.warning(f"Gemini API Error: {e}")
-            fallback_exercises = pick_exercises_for_part("full body", bmi_val)
-            fallback_text = f"⚠️ AI model temporarily unavailable. Here are some exercises:\n\n" + "\n".join(fallback_exercises)
-            if return_retrieval_info:
-                return fallback_text, ex_titles, ex_distances
-            return fallback_text
-    
+    try:
+        response = gemini_model.models.generate_content(
+            model=GEMINI_MODEL_NAME,
+            contents=full_prompt
+        )
+        response_text = response.text.strip()
+        if return_retrieval_info:
+            return response_text, ex_titles, ex_distances
+        return response_text
+    except Exception as e:
+        st.warning(f"Gemini API Error: {e}")
+        fallback_exercises = pick_exercises_for_part("full body", bmi_val)
+        fallback_text = f"⚠️ AI model temporarily unavailable. Here are some exercises:\n\n" + "\n".join(fallback_exercises)
+        if return_retrieval_info:
+            return fallback_text, ex_titles, ex_distances
+        return fallback_text
 
 # SIDEBAR: PROFILE MANAGER & INPUTS
 with st.sidebar:
